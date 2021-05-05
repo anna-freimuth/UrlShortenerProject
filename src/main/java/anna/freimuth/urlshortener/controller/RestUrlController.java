@@ -6,10 +6,8 @@ import anna.freimuth.urlshortener.entity.Url;
 import anna.freimuth.urlshortener.repo.UrlRepo;
 import anna.freimuth.urlshortener.service.ShortenerService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 
@@ -28,6 +26,7 @@ public class RestUrlController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ShortUrlDto convertLongUrl(@RequestBody LongUrlDto longUrlDto){
             Url url = new Url();
 
