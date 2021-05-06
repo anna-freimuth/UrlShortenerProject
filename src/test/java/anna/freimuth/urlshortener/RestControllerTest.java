@@ -1,6 +1,5 @@
 package anna.freimuth.urlshortener;
 
-
 import anna.freimuth.urlshortener.controller.RestUrlController;
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.dto.ShortUrlDto;
@@ -70,6 +69,7 @@ public class RestControllerTest {
                                 .content("{ \"long_url\": \"https://www.google.com\"}")
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
         ;
     }
 
