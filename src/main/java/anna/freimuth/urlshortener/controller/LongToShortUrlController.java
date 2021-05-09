@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/url")
 @RestController
 public class LongToShortUrlController {
+
     private final UrlService urlService;
     private final String HOST;
 

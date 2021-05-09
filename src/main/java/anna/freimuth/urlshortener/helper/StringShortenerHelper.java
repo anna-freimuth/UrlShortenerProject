@@ -3,7 +3,7 @@ package anna.freimuth.urlshortener.helper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EncodeAndDecodeHelper {
+public class StringShortenerHelper {
 
     private static final String base ="wmdganyvci5hk12p7ufr90x3qjts4lzo8b6e";  // 36 characters base
     private static final int baseLength = base.length();
