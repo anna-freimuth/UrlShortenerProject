@@ -1,18 +1,17 @@
 package anna.freimuth.urlshortener;
-import anna.freimuth.urlshortener.service.ShortenerService;
+import anna.freimuth.urlshortener.helper.EncodeAndDecodeHelper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ShortenerServiceTest {
 
-    ShortenerService shortenerService = new ShortenerService();
 
     @Test
     public void max_8_char_number_decode() {
 
         String max8CharNumber = "eeeeeeee";
-        long number = shortenerService.decode(max8CharNumber);
+        long number = EncodeAndDecodeHelper.shortUrlToId(max8CharNumber);
         assertEquals(2821109907455L, number);
     }
 
@@ -20,7 +19,7 @@ public class ShortenerServiceTest {
     public void max_8_char_number_encode() {
 
         long max8CharNumber = 2821109907455L;
-        String encoded = shortenerService.encode(max8CharNumber);
+        String encoded = EncodeAndDecodeHelper.idToShortUrl(max8CharNumber);
         assertEquals("eeeeeeee", encoded);
     }
 
@@ -28,7 +27,7 @@ public class ShortenerServiceTest {
     public void min_number_decode() {
 
         String minNumber = "w";
-        long number = shortenerService.decode(minNumber);
+        long number = EncodeAndDecodeHelper.shortUrlToId(minNumber);
         assertEquals(0L, number);
     }
 
@@ -36,7 +35,7 @@ public class ShortenerServiceTest {
     public void min_number_encode() {
 
         long minNumber = 0L;
-        String encoded = shortenerService.encode(minNumber);
+        String encoded = EncodeAndDecodeHelper.idToShortUrl(minNumber);
         assertEquals("w", encoded);
     }
 }
