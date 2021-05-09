@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class RestControllerTest {
+public class LongToShortUrlControllerTest {
 
     @Autowired
     WebApplicationContext wac;
@@ -39,7 +39,7 @@ public class RestControllerTest {
     }
 
     @Test
-    void returnStatusCreated() throws Exception {
+    void shortenLongUrl() throws Exception {
         when(shortenerService.saveLongUrl(any(LongUrlDto.class))).thenReturn("coded");
         this.mockMvc
                 .perform(
