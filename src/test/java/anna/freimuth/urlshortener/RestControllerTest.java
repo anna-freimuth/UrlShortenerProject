@@ -2,7 +2,7 @@ package anna.freimuth.urlshortener;
 
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.repo.UrlRepo;
-import anna.freimuth.urlshortener.service.UrlService;
+import anna.freimuth.urlshortener.service.ShortenerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -28,7 +28,7 @@ public class RestControllerTest {
     WebApplicationContext wac;
     private MockMvc mockMvc;
     @MockBean
-    UrlService urlService;
+    ShortenerService shortenerService;
     @MockBean
     UrlRepo urlRepo;
 
@@ -40,7 +40,7 @@ public class RestControllerTest {
 
     @Test
     void returnStatusCreated() throws Exception {
-        when(urlService.saveLongUrl(any(LongUrlDto.class))).thenReturn("coded");
+        when(shortenerService.saveLongUrl(any(LongUrlDto.class))).thenReturn("coded");
         this.mockMvc
                 .perform(
                         MockMvcRequestBuilders.post("/url")

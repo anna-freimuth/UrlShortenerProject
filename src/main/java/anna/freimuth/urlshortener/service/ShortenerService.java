@@ -7,11 +7,11 @@ import anna.freimuth.urlshortener.repo.UrlRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UrlService {
+public class ShortenerService {
 
     private final UrlRepo urlRepo;
 
-    public UrlService( UrlRepo urlRepo) {
+    public ShortenerService(UrlRepo urlRepo) {
         this.urlRepo = urlRepo;
     }
 
