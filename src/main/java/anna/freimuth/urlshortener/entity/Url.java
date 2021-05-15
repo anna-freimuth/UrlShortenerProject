@@ -2,6 +2,12 @@ package anna.freimuth.urlshortener.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 
 @Entity
 @Table(name="url", schema = "url")
@@ -12,43 +18,45 @@ public class Url {
     private  long id;
 
     @Column(name="long_url")
-    private  String long_url;
+    private  String longUrl;
 
     @Column(name="expiration_date")
-    private Timestamp expiration_date;
+    private Timestamp expirationDate = Timestamp.from(
+            LocalDateTime.now().toInstant(ZoneOffset.UTC).plus(3L, ChronoUnit.DAYS)
+    );
 
     @Column(name="user_id")
-    private  long user_id;
+    private  long userId;
 
     public long getId() {
         return id;
     }
 
-    public String getLong_url() {
-        return long_url;
+    public String getLongUrl() {
+        return longUrl;
     }
 
-    public Timestamp getExpiration_date() {
-        return expiration_date;
+    public Timestamp getExpirationDate() {
+        return expirationDate;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return userId;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setLong_url(String long_url) {
-        this.long_url = long_url;
+    public void setLongUrl(String longUrl) {
+        this.longUrl = longUrl;
     }
 
-    public void setExpiration_date(Timestamp expiration_date) {
-        this.expiration_date = expiration_date;
+    public void setExpirationDate(Timestamp expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

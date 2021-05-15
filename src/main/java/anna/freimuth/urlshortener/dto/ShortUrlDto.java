@@ -2,9 +2,9 @@ package anna.freimuth.urlshortener.dto;
 
 public class ShortUrlDto {
 
-    public final String short_url;
+    public final String shortUrl;
 
-    public ShortUrlDto(String short_url) {
-        this.short_url = short_url;
+    public ShortUrlDto(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 }
