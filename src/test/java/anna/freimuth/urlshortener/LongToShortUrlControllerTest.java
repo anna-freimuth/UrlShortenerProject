@@ -45,11 +45,11 @@ public class LongToShortUrlControllerTest {
                 .perform(
                         MockMvcRequestBuilders.post("/url")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content("{ \"long_url\": \"https://www.google.com\"}")
+                                .content("{ \"longUrl\": \"https://www.google.com\"}")
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.content().json("{\"short_url\": \"http://localhost:8080/coded\"}"))
+                .andExpect(MockMvcResultMatchers.content().json("{\"shortUrl\": \"http://localhost:8080/coded\"}"))
         ;
     }
 }
