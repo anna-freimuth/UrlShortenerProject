@@ -2,7 +2,7 @@ package anna.freimuth.urlshortener;
 
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.repo.UrlRepo;
-import anna.freimuth.urlshortener.service.ShortenerService;
+import anna.freimuth.urlshortener.service.RedirectService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -10,25 +10,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.ArgumentMatchers.any;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class LongToShortUrlControllerTest {
+public class RedirectControllerTest {
 
     @Autowired
     WebApplicationContext wac;
     private MockMvc mockMvc;
     @MockBean
-    ShortenerService shortenerService;
+    RedirectService redirectService;
+
     @MockBean
     UrlRepo urlRepo;
 
@@ -39,17 +41,19 @@ public class LongToShortUrlControllerTest {
     }
 
     @Test
-    void shortenLongUrl() throws Exception {
-        when(shortenerService.saveLongUrl(any(LongUrlDto.class))).thenReturn("coded");
+    void redirectToLongUrl() throws Exception {
+        String shortUrl = "shortUrl";
+        String longUrl = "https://www.example.org";
+        LongUrlDto longUrlDto = new LongUrlDto(5, longUrl, Timestamp.valueOf(LocalDateTime.now()), 0L);
+        when(redirectService.findLongUrl(shortUrl))
+                .thenReturn(longUrlDto);
+
         this.mockMvc
                 .perform(
-                        MockMvcRequestBuilders.post("/url")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content("{ \"longUrl\": \"https://www.google.com\"}")
-                )
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.content().json("{\"shortUrl\": \"http://localhost:8080/coded\"}"))
+                        MockMvcRequestBuilders.get("/"+ shortUrl))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.header().string("Location", longUrl))
+                .andReturn();
         ;
     }
 }

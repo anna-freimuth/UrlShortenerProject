@@ -4,24 +4,24 @@ import java.sql.Timestamp;
 
 public class LongUrlDto {
 
-    private int id;
-    private final String long_url;
-    private Timestamp expiration_date;
-    private int user_id;
+    private long id;
+    private final String longUrl;
+    private Timestamp expirationDate;
+    private long userId;
 
-    public LongUrlDto(int id, String long_url, Timestamp expiration_date, int user_id) {
+    public LongUrlDto(long id, String longUrl, Timestamp expirationDate, long userId) {
         this.id= id;
-        this.long_url = long_url;
-        this.expiration_date = expiration_date;
-        this.user_id = user_id;
+        this.longUrl = longUrl;
+        this.expirationDate = expirationDate;
+        this.userId = userId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public String getLong_url() {
-        return long_url;
+    public String getLongUrl() {
+        return longUrl;
     }
 
     public void setId(int id) {
