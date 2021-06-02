@@ -1,8 +1,9 @@
 package anna.freimuth.urlshortener.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class LongUrlDto {
+public class LongUrlDto implements Serializable {
 
     private long id;
     private final String longUrl;
