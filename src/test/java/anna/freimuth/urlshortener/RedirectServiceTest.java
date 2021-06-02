@@ -2,13 +2,13 @@ package anna.freimuth.urlshortener;
 
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.entity.Url;
+import anna.freimuth.urlshortener.exception.EntityNotFoundException;
 import anna.freimuth.urlshortener.repo.UrlRepo;
 import anna.freimuth.urlshortener.service.RedirectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class RedirectServiceTest {
     UrlRepo urlRepo;
 
     @Test
-    void findLongUrl() {
+    void findLongUrl() throws EntityNotFoundException {
 
         RedirectService redirectService = new RedirectService(urlRepo);
 
@@ -57,7 +57,7 @@ public class RedirectServiceTest {
 
         when(urlRepo.findNonExpiredById(id)).thenReturn(databaseObject);
 
-        assertThrows(ResponseStatusException.class, () -> redirectService.findLongUrl(shortUrl));
+        assertThrows(EntityNotFoundException.class, () -> redirectService.findLongUrl(shortUrl));
     }
 }
 

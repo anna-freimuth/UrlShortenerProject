@@ -1,6 +1,7 @@
 package anna.freimuth.urlshortener.controller;
 
 import anna.freimuth.urlshortener.dto.LongUrlDto;
+import anna.freimuth.urlshortener.exception.EntityNotFoundException;
 import anna.freimuth.urlshortener.service.RedirectService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ private RedirectService redirectService;
     }
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity<String> redirectToLongUrl(@PathVariable String shortUrl) {
+    public ResponseEntity<String> redirectToLongUrl(@PathVariable String shortUrl) throws EntityNotFoundException {
         LongUrlDto response = redirectService.findLongUrl(shortUrl);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Location", response.getLongUrl());
