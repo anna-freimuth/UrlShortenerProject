@@ -1,15 +1,12 @@
 package anna.freimuth.urlshortener.service;
 
-import anna.freimuth.urlshortener.controller.RestResponseEntityExceptionHandler;
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.entity.Url;
 import anna.freimuth.urlshortener.exception.EntityNotFoundException;
 import anna.freimuth.urlshortener.helper.StringShortenerHelper;
 import anna.freimuth.urlshortener.repo.UrlRepo;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
