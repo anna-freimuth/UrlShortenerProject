@@ -31,7 +31,6 @@ public class RedirectService {
 
     private Url unpackUrl(Optional<Url> url) throws EntityNotFoundException {
         if(url.isPresent()) return url.get();
-       // throw new ResponseStatusException(HttpStatus.NOT_FOUND, "url is expired or does not exist");
         throw new EntityNotFoundException("Url not found");
     }
 }
