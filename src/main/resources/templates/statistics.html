@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+</head>
+<body>
+<div class="container">
+    <h1>Statistics</h1>
+    <table>
+        <tr>
+            <th>Short Url</th>
+            <th>Long Url</th>
+            <th>amount of calls</th>
+        </tr>
+        <tr th:each="url: ${statistic}">
+            <td>[[${host}]]/[[${url.shortUrl}]]</td>
+            <td th:text="${url.longUrl}"></td>
+            <td th:text="${url.amount}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

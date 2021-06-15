@@ -28,6 +28,9 @@ public class Url {
     @Column(name="user_id")
     private  long userId;
 
+    @Column(name="amount")
+    private  long amount;
+
     public long getId() {
         return id;
     }
@@ -44,6 +47,10 @@ public class Url {
         return userId;
     }
 
+    public long getAmount() {
+        return amount;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -58,5 +65,9 @@ public class Url {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }

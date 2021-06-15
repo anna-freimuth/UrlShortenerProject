@@ -14,20 +14,29 @@ import java.util.Optional;
 public class RedirectService {
 
     private final UrlRepo urlRepo;
+    private final KafkaProducerService kafkaProducerService;
 
-    public RedirectService(UrlRepo urlRepo) {
+    public RedirectService(UrlRepo urlRepo, KafkaProducerService kafkaProducerService) {
         this.urlRepo = urlRepo;
+        this.kafkaProducerService = kafkaProducerService;
+    }
+
+    public LongUrlDto findLongUrl(String shortUrl) throws EntityNotFoundException {
+        LongUrlDto response = _findLongUrl(shortUrl);
+        kafkaProducerService.send(response.getId());
+        return response;
     }
 
     @Cacheable(value = "longUrlCache", key = "#shortUrl")
-    public LongUrlDto findLongUrl(String shortUrl) throws EntityNotFoundException {
+    public LongUrlDto _findLongUrl(String shortUrl) throws EntityNotFoundException {
         long id = StringShortenerHelper.shortUrlToId(shortUrl);
         Url url = unpackUrl(urlRepo.findNonExpiredById(id));
         return new LongUrlDto(url.getId(), url.getLongUrl(), url.getExpirationDate(), url.getUserId());
     }
 
     private Url unpackUrl(Optional<Url> url) throws EntityNotFoundException {
-        if(url.isPresent()) return url.get();
+        if (url.isPresent()) return url.get();
         throw new EntityNotFoundException("Url not found");
     }
+
 }
