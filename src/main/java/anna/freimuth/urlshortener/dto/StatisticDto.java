@@ -1,11 +1,9 @@
 package anna.freimuth.urlshortener.dto;
 
-import anna.freimuth.urlshortener.controller.LongToShortUrlController;
 import anna.freimuth.urlshortener.entity.Url;
 import anna.freimuth.urlshortener.helper.StringShortenerHelper;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class StatisticDto implements Serializable {
 

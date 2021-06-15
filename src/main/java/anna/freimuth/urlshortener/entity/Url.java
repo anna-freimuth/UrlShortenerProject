@@ -2,12 +2,9 @@ package anna.freimuth.urlshortener.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 
 @Entity
 @Table(name="url", schema = "url")

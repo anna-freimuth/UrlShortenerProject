@@ -16,7 +16,6 @@ public class StatisticsService {
         this.urlRepo = urlRepo;
     }
 
-    // is being called by kafka listener
     public void countRedirects(long id, long countAdded) {
         urlRepo.addCount(id, countAdded);
     }
