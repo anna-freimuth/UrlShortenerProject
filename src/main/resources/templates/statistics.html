@@ -18,10 +18,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="url: ${statistic}">
-            <td>[[${host}]]/[[${url.shortUrl}]]</td>
-            <td th:text="${url.longUrl}"></td>
-            <td th:text="${url.amount}"></td>
+        <tr th:each="statistic: ${statistic}">
+            <td>[[${host}]]/[[${statistic.shortUrl}]]</td>
+            <td th:text="${statistic.longUrl}"></td>
+            <td th:text="${statistic.amount}"></td>
         </tr>
         </tbody>
     </table>

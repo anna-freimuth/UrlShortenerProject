@@ -1,25 +1,28 @@
 package anna.freimuth.urlshortener.dto;
 
-import anna.freimuth.urlshortener.entity.Url;
-import anna.freimuth.urlshortener.helper.StringShortenerHelper;
+import anna.freimuth.urlshortener.entity.Statistic;
 
 import java.io.Serializable;
 
 public class StatisticDto implements Serializable {
 
+    public final long id;
     public final String shortUrl;
     public final String longUrl;
     public long amount = 0;
 
-    public StatisticDto(long id, String longUrl, long amount) {
-        this.shortUrl = StringShortenerHelper.idToShortUrl(id);
+    public StatisticDto(long id, String shortUrl, String longUrl, long amount) {
+        this.shortUrl = shortUrl;
+        this.id = id;
         this.longUrl = longUrl;
         this.amount = amount;
     }
 
-    public StatisticDto(Url url) {
-        this.shortUrl = StringShortenerHelper.idToShortUrl(url.getId());
-        this.longUrl = url.getLongUrl();
-        this.amount = url.getAmount();
+    public StatisticDto(Statistic statistic) {
+        this.shortUrl = statistic.getShortUrl();
+        this.id = statistic.getId();
+        this.longUrl = statistic.getLongUrl();
+        this.amount = statistic.getAmount();
     }
+
 }

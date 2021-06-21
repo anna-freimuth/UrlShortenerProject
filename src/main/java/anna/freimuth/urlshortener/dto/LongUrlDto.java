@@ -10,11 +10,10 @@ public class LongUrlDto implements Serializable {
     private long id;
     private final String longUrl;
     private Timestamp expirationDate;
-    private long amount = 0;
     private long userId;
 
     public LongUrlDto(long id, String longUrl, Timestamp expirationDate, long userId) {
-        this.id= id;
+        this.id = id;
         this.longUrl = longUrl;
         this.expirationDate = expirationDate;
         this.userId = userId;
@@ -25,7 +24,6 @@ public class LongUrlDto implements Serializable {
         this.longUrl = url.getLongUrl();
         this.expirationDate = url.getExpirationDate();
         this.userId = url.getUserId();
-        this.amount = url.getAmount();
     }
 
     public long getId() {
@@ -40,8 +38,6 @@ public class LongUrlDto implements Serializable {
         this.id = id;
     }
 
-
-
     public Timestamp getExpirationDate() {
         return expirationDate;
     }
@@ -49,14 +45,5 @@ public class LongUrlDto implements Serializable {
     public void setExpirationDate(Timestamp expirationDate) {
         this.expirationDate = expirationDate;
     }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
-
 
 }

@@ -1,5 +1,6 @@
 package anna.freimuth.urlshortener.service;
 
+import anna.freimuth.urlshortener.dto.KafkaUrlDto;
 import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.entity.Url;
 import anna.freimuth.urlshortener.exception.EntityNotFoundException;
@@ -23,7 +24,8 @@ public class RedirectService {
 
     public LongUrlDto findLongUrl(String shortUrl) throws EntityNotFoundException {
         LongUrlDto response = _findLongUrl(shortUrl);
-        kafkaProducerService.send(response.getId());
+        KafkaUrlDto kafkaUrlDto = new KafkaUrlDto(shortUrl, response.getLongUrl());
+        kafkaProducerService.send(kafkaUrlDto);
         return response;
     }
 

@@ -7,26 +7,20 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 
 @Entity
-@Table(name="url", schema = "url")
+@Table(name = "url", schema = "url")
 public class Url {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    private long id;
 
-    @Column(name="long_url")
-    private  String longUrl;
+    private String longUrl;
 
-    @Column(name="expiration_date")
     private Timestamp expirationDate = Timestamp.from(
-            LocalDateTime.now().toInstant(ZoneOffset.UTC).plus(3L, ChronoUnit.DAYS)
+        LocalDateTime.now().toInstant(ZoneOffset.UTC).plus(3L, ChronoUnit.DAYS)
     );
 
-    @Column(name="user_id")
-    private  long userId;
-
-    @Column(name="amount")
-    private  long amount;
+    private long userId;
 
     public long getId() {
         return id;
@@ -44,10 +38,6 @@ public class Url {
         return userId;
     }
 
-    public long getAmount() {
-        return amount;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -62,9 +52,5 @@ public class Url {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
     }
 }
