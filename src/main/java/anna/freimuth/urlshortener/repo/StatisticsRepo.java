@@ -13,6 +13,6 @@ public interface StatisticsRepo extends CrudRepository<Statistic, Long> {
     @Query("SELECT s FROM Statistic s WHERE s.shortUrl = :shortUrl")
     Optional<Statistic> findByShortUrl(@Param("shortUrl") String shortUrl);
 
-    @Query("SELECT  u FROM Statistic u ORDER BY u.amount DESC")
+    @Query("SELECT  s FROM Statistic s ORDER BY s.amount DESC")
     List<Statistic> topCalled();
 }
