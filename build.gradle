@@ -29,6 +29,8 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.4.0'
     implementation group: 'javax.cache', name: 'cache-api', version: '1.1.1'
     implementation group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.7.2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 test {

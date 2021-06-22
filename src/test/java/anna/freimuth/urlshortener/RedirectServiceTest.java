@@ -4,6 +4,7 @@ import anna.freimuth.urlshortener.dto.LongUrlDto;
 import anna.freimuth.urlshortener.entity.Url;
 import anna.freimuth.urlshortener.exception.EntityNotFoundException;
 import anna.freimuth.urlshortener.repo.UrlRepo;
+import anna.freimuth.urlshortener.service.KafkaProducerService;
 import anna.freimuth.urlshortener.service.RedirectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,10 +24,13 @@ public class RedirectServiceTest {
     @MockBean
     UrlRepo urlRepo;
 
+    @MockBean
+    KafkaProducerService kafkaProducerService;
+
     @Test
     void findLongUrl() throws EntityNotFoundException {
 
-        RedirectService redirectService = new RedirectService(urlRepo);
+        RedirectService redirectService = new RedirectService(urlRepo, kafkaProducerService);
 
         String shortUrl = "do";
         Long id = 103L;
@@ -48,7 +52,7 @@ public class RedirectServiceTest {
     @Test
     void expiredLongUrl() {
 
-        RedirectService redirectService = new RedirectService(urlRepo);
+        RedirectService redirectService = new RedirectService(urlRepo, kafkaProducerService);
 
         String shortUrl = "do";
         Long id = 103L;

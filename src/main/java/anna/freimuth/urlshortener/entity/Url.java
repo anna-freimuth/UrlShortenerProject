@@ -2,31 +2,25 @@ package anna.freimuth.urlshortener.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 
 @Entity
-@Table(name="url", schema = "url")
+@Table(name = "url", schema = "url")
 public class Url {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    private long id;
 
-    @Column(name="long_url")
-    private  String longUrl;
+    private String longUrl;
 
-    @Column(name="expiration_date")
     private Timestamp expirationDate = Timestamp.from(
-            LocalDateTime.now().toInstant(ZoneOffset.UTC).plus(3L, ChronoUnit.DAYS)
+        LocalDateTime.now().toInstant(ZoneOffset.UTC).plus(3L, ChronoUnit.DAYS)
     );
 
-    @Column(name="user_id")
-    private  long userId;
+    private long userId;
 
     public long getId() {
         return id;
