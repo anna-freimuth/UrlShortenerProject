@@ -1,10 +1,13 @@
 package anna.freimuth.urlshortener.service;
 
-
 import anna.freimuth.urlshortener.dto.KafkaUrlDto;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @EnableKafka
 @Service
@@ -16,11 +19,19 @@ public class KafkaListenerService {
         this.statisticsService = statisticsService;
     }
 
-    @KafkaListener(topics = "redirect_statistic")
-    public void msgListener(String redirectString) {
+    @KafkaListener(topics = "redirect_statistic", containerFactory = "kafkaListenerContainerFactory")
+    public void msgListener(List<KafkaUrlDto> kafkaUrlDto) {
 
-        String[] strings = redirectString.split("___");
-        KafkaUrlDto kafkaUrlDto = new KafkaUrlDto(strings[0], strings[1]);
-        statisticsService.countRedirects(1, kafkaUrlDto);
+        Map<KafkaUrlDto, Long> kafkaUrlDtoSplitUp = kafkaUrlDto
+            .stream()
+            .collect(
+                Collectors.groupingBy(
+                    dto -> dto,
+                    Collectors.counting()
+                )
+            );
+        for (Map.Entry<KafkaUrlDto, Long> urlDtoEntry : kafkaUrlDtoSplitUp.entrySet()) {
+            statisticsService.countRedirects(urlDtoEntry.getValue(), urlDtoEntry.getKey());
+        }
     }
 }

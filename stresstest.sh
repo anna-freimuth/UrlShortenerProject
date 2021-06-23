@@ -6,8 +6,10 @@ totalCalls=0
 while true; do
 
   short_url=${short_urls[$((RANDOM % ${#short_urls[@]}))]}
-  curl -q "$host/$short_url"
+  for i in {1..50}; do
+    curl -q "$host/$short_url" &
+  done
   totalCalls=$(($totalCalls + 1))
-  echo "Called $totalCalls"
+  echo "$(date "+%Y-%m-%d %H:%m:%S") Called $host/$short_url - total: $((totalCalls * 50))"
   sleep $((RANDOM % 2))
 done
