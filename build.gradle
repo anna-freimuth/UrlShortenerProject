@@ -1,7 +1,14 @@
+buildscript {
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.2.14'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.4.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "org.flywaydb.flyway" version "7.8.1"
 }
 
 group = 'anna.freimuth'
@@ -12,13 +19,28 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'junit:junit:4.13.1'
+    implementation 'org.projectlombok:lombok:1.18.18'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.4.0'
+    implementation group: 'javax.cache', name: 'cache-api', version: '1.1.1'
+    implementation group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.7.2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 test {
     useJUnitPlatform()
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/url'
+    user = 'postgres'
+    password = '12345'
+    schemas = ['url']
 }
