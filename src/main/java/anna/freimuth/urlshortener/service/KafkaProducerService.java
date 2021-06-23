@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class KafkaProducerService {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, KafkaUrlDto> kafkaTemplate;
 
     public void send(KafkaUrlDto kafkaUrlDto) {
-        kafkaTemplate.send("redirect_statistic", kafkaUrlDto.shortUrl + "___" + kafkaUrlDto.longUrl);
+        kafkaTemplate.send("redirect_statistic", kafkaUrlDto);
     }
 
 }
