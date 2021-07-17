@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/url")
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class LongToShortUrlController {
 
     private final ShortenerService shortenerService;
