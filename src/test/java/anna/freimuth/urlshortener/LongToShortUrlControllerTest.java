@@ -43,13 +43,13 @@ public class LongToShortUrlControllerTest {
         when(shortenerService.saveLongUrl(any(LongUrlDto.class))).thenReturn("coded");
         this.mockMvc
                 .perform(
-                        MockMvcRequestBuilders.post("/url")
+                        MockMvcRequestBuilders.post("/api/url")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content("{ \"longUrl\": \"https://www.google.com\"}")
                 )
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.content().json("{\"shortUrl\": \"http://localhost:8080/coded\"}"))
+                .andExpect(MockMvcResultMatchers.content().json("{\"shortUrl\": \"http://localhost:8080/api/coded\"}"))
         ;
     }
 }

@@ -18,7 +18,7 @@ private RedirectService redirectService;
         this.redirectService = redirectService;
     }
 
-    @GetMapping("/{shortUrl}")
+    @GetMapping("/api/{shortUrl}")
     public ResponseEntity<String> redirectToLongUrl(@PathVariable String shortUrl) throws EntityNotFoundException {
         LongUrlDto response = redirectService.findLongUrl(shortUrl);
         HttpHeaders responseHeaders = new HttpHeaders();

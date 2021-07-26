@@ -50,7 +50,7 @@ public class RedirectControllerTest {
 
         this.mockMvc
                 .perform(
-                        MockMvcRequestBuilders.get("/"+ shortUrl))
+                        MockMvcRequestBuilders.get("/api/"+ shortUrl))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.header().string("Location", longUrl))
                 .andReturn();

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/url")
+@RequestMapping("/api/url")
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class LongToShortUrlController {
@@ -24,6 +24,6 @@ public class LongToShortUrlController {
     @ResponseStatus(HttpStatus.CREATED)
     public ShortUrlDto shortenLongUrl(@RequestBody LongUrlDto longUrlDto) {
         String shortenedUrl = shortenerService.saveLongUrl(longUrlDto);
-        return new ShortUrlDto(HOST + "/" + shortenedUrl);
+        return new ShortUrlDto(HOST + "/api/" + shortenedUrl);
     }
 }
