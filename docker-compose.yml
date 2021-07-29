@@ -1,0 +1,39 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    hostname: postgres
+    restart: on-failure:1
+    ## Adding "network_mode: bridge" to each service in your docker-compose.yml will stop compose from creating a network.
+    ## If any service is not configured with this "bridge" (or "host"), a network will be created.
+    #network_mode: bridge
+    environment:
+      POSTGRES_DB: url
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    volumes:
+      - ./db:/var/lib/postgresql/data:rw
+    ports:
+      - 5432:5432
+    networks:
+      - url-shortener
+  backend:
+    build:
+      context: .
+    container_name: url-shortener-backend
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    networks:
+      - url-shortener
+    depends_on:
+      - db
+#  frontend:
+#    image: url-shortener-frontend:latest
+#    container_name: url-shortener-frontend
+#    restart: on-failure:1
+volumes:
+  database-data:
+networks:
+  url-shortener:
